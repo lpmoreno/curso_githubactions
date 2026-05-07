@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Inspect machine
-        run:
+        run: |
           ls -al
           whoami
           pwd
