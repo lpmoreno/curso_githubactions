@@ -1,0 +1,26 @@
+name: Despliegue continuo (Con acciones de Docker)
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  buildAndPushImage:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Login into Docker Hub
+        uses: actions/login-action@v4
+        with:
+          username: lpanmor
+          passwrod: ${{ secrets.DOCKER_SECRET }}
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v4
+      - name: Build and push Docker Image
+        uses: docker/build-push-action@v7
+        with:
+          context: ./hangman-api
+          push: true
+          tags: lpanmor/hangman-api-cep-grupo-a:latest
+          file: ./hangman-api/Dockerfile
