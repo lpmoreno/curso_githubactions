@@ -35,7 +35,7 @@ jobs:
         uses: actions/download-artifact@v8
         with: 
           name: build-code
-          path: hangman-api/dis
+          path: hangman-api/dist
       - name: Build Docker Image
         working-directory: ./hangman-api
         run: docker build -t lpmoreno/hangman-api -f Dockerfile.workflow .
