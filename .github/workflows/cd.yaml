@@ -38,4 +38,4 @@ jobs:
           path: hangman-api/dis
       - name: Build Docker Image
         working-directory: ./hangman-api
-        run: docker build lpmoreno/hangman-api -f Dockerfile.workflow
+        run: docker build -t lpmoreno/hangman-api -f Dockerfile.workflow .
