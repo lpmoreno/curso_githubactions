@@ -1,10 +1,10 @@
-name: Integracion continua
+name: Integracion continua hangman-front
 
 on:
 
   pull_request:
     branches: [ main ]
-    paths: [ 'hangman-api/**' ]
+    paths: [ 'hangman-front/**' ]
 
 jobs:
   
