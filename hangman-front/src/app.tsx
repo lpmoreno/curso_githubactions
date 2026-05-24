@@ -5,4 +5,4 @@ export const App: React.FunctionComponent = () => {
   return <StartGameComponent />;
 };
 
-// Comment 1
+// Comment 2

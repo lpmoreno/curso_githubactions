@@ -1,7 +1,6 @@
 name: Integracion continua hangman-front
 
 on:
-
   pull_request:
     branches: [ main ]
     paths: [ 'hangman-front/**' ]
