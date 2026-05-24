@@ -3,6 +3,10 @@ name: Despliegue continuo  hangman-front (Con acciones de Docker)
 "on": 
   workflow_dispatch:
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   buildAndPushImage:
     runs-on: ubuntu-latest
@@ -15,7 +19,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.TOKEN_GITHUB }}
+          password: ${{ github.token }}
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v4
       - name: Build and push Docker Image
@@ -23,5 +27,5 @@ jobs:
         with:
           context: ./hangman-front
           push: true
-          tags: ghcr.io/lpmoreno/hangman-front:latest
+          tags: ghcr.io/${{ github.repository_owner }}/hangman-front:latest
           file: ./hangman-front/Dockerfile

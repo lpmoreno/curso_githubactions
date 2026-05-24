@@ -19,11 +19,19 @@ Corregimos el código, y volvemos a lanzar el ci, que finaliza correctamente:
 
 ![Imagen 4.](Capturas/Captura4.png)
 ![Imagen 5.](Capturas/Captura5.png)
+![Imagen 7.](Capturas/Captura7.png)
 
 # Workflow para el ejecutar el CD del proyecto de frontend
 
 Pasamos ahora al continuous delivery.
 
 Creamos el archivo que realizará el despliegue:
+![Imagen 6.](Capturas/Captura6.png)
 
+Tras corregir algunos errores en el archivo yaml, conseguimos ejectutar correctamente la acción CD:
+![Imagen 8.](Capturas/Captura8.png)
+
+
+Podemos descargar el artifact generado desde la siguiente URL:
+https://github.com/lpmoreno/curso_githubactions/actions/runs/26367393576/artifacts/7186871836
 
