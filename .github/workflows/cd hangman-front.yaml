@@ -1,42 +1,27 @@
-name: Despliegue continuo hangman-front
+name: Despliegue continuo  hangman-front (Con acciones de Docker)
 
 on: 
   workflow_dispatch:
 
 jobs:
-  build:
+  buildAndPushImage:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Setup Node.js version
-        uses: actions/setup-node@v6
+      - name: Login to Github container registry
+        uses: docker/login-action@v4
         with:
-          node-version: 18
-      - name: Build
-        working-directory: ./hangman-front
-        run: |
-          npm ci
-          npm run build --if-present
-      - name: Upload dist folder
-        uses: actions/upload-artifact@v6
+          registry: ghcr.io
+          username: ${{ actor }}
+          password: ${{ secrets.TOKEN_GITHUB }}
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v4
+      - name: Build and push Docker Image
+        uses: docker/build-push-action@v7
         with:
-          name: build-code
-          path: hangman-front/dist
-  
-  delivery:
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Download artifact
-        uses: actions/download-artifact@v8
-        with: 
-          name: build-code
-          path: hangman-front/dist
-      - name: Build Docker Image
-        working-directory: ./hangman-api
-        run: docker build -t lpanmor/hangman-front -f Dockerfile.workflow .
+          context: ./hangman-front
+          push: true
+          tags: ghcr.io/lpmoreno/hangman-front:latest
+          file: ./hangman-front/Dockerfile
