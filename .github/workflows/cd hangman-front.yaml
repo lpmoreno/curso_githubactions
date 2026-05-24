@@ -1,4 +1,4 @@
-name: Despliegue continuo
+name: Despliegue continuo hangman-front
 
 on: 
   workflow_dispatch:
